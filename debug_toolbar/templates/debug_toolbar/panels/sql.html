@@ -74,6 +74,7 @@
             {{ query.duration|floatformat:"2" }}ms
           </td>
           <td class="djdt-actions">
+            <button type="button" data-sql="{{ query.raw_sql }}" onclick="window.djdt.copyToClipboard(this, this.dataset.sql)">Copy</button>
             {% if query.params %}
               {% if query.is_select %}
                 <form method="post">
