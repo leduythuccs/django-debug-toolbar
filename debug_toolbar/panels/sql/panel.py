@@ -193,6 +193,7 @@ class SQLPanel(Panel):
         return [
             path("sql_select/", views.sql_select, name="sql_select"),
             path("sql_explain/", views.sql_explain, name="sql_explain"),
+            path("sql_analyze/", views.sql_analyze, name="sql_analyze"),
             path("sql_profile/", views.sql_profile, name="sql_profile"),
         ]
 

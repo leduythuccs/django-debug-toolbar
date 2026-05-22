@@ -74,6 +74,7 @@
             {{ query.duration|floatformat:"2" }}ms
           </td>
           <td class="djdt-actions">
+            <button type="button" data-sql="{{ query.raw_sql }}" onclick="window.djdt.copyToClipboard(this, this.dataset.sql)">Copy</button>
             {% if query.params %}
               {% if query.is_select %}
                 <form method="post">
@@ -81,6 +82,7 @@
                   <button formaction="{% url 'djdt:sql_select' %}" class="remoteCall">Sel</button>
                   <button formaction="{% url 'djdt:sql_explain' %}" class="remoteCall">Expl</button>
                   {% if query.vendor == 'mysql' %}
+                    <button formaction="{% url 'djdt:sql_analyze' %}" class="remoteCall">Analyze</button>
                     <button formaction="{% url 'djdt:sql_profile' %}" class="remoteCall">Prof</button>
                   {% endif %}
                 </form>
