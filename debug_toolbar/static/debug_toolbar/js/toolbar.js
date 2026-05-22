@@ -394,6 +394,15 @@ window.djdt = {
     init: djdt.init,
     close: djdt.hideOneLevel,
     cookie: djdt.cookie,
+    copyToClipboard(button, text) {
+        navigator.clipboard.writeText(text).then(() => {
+            const original = button.textContent;
+            button.textContent = "Copied!";
+            setTimeout(() => {
+                button.textContent = original;
+            }, 1500);
+        });
+    },
 };
 
 if (document.readyState !== "loading") {

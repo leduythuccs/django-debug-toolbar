@@ -98,6 +98,16 @@ class SQLSelectForm(forms.Form):
             result = cursor.fetchall()
             return result, headers
 
+    def analyze(self):
+        query = self.cleaned_data["query"]
+        sql = query["raw_sql"]
+        params = json.loads(query["params"])
+        with self.cursor as cursor:
+            cursor.execute(f"ANALYZE FORMAT=JSON {sql}", params)
+            headers = [d[0] for d in cursor.description]
+            result = cursor.fetchall()
+            return result, headers
+
     def profile(self):
         query = self.cleaned_data["query"]
         sql = query["raw_sql"]

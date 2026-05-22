@@ -1,3 +1,5 @@
+import json as _json
+
 from django.http import HttpResponseBadRequest, JsonResponse
 from django.template.loader import render_to_string
 from django.views.decorators.csrf import csrf_exempt
@@ -66,6 +68,39 @@ def sql_explain(request):
             "alias": query["alias"],
         }
         content = render_to_string("debug_toolbar/panels/sql_explain.html", context)
+        return JsonResponse({"content": content})
+    return HttpResponseBadRequest("Form errors")
+
+
+@csrf_exempt
+@login_not_required
+@require_show_toolbar
+@render_with_toolbar_language
+def sql_analyze(request):
+    """Returns the output of ANALYZE FORMAT=JSON on the given MySQL query"""
+    verified_data = get_signed_data(request)
+    if not verified_data:
+        return HttpResponseBadRequest("Invalid signature")
+    form = SQLSelectForm(verified_data)
+
+    if form.is_valid():
+        query = form.cleaned_data["query"]
+        result, headers = form.analyze()
+        json_result = None
+        if len(result) == 1 and len(result[0]) == 1:
+            try:
+                json_result = _json.dumps(_json.loads(result[0][0]), indent=2)
+            except (ValueError, TypeError):
+                pass
+        context = {
+            "result": result,
+            "json_result": json_result,
+            "sql": reformat_sql(query["sql"], with_toggle=False),
+            "duration": query["duration"],
+            "headers": headers,
+            "alias": query["alias"],
+        }
+        content = render_to_string("debug_toolbar/panels/sql_analyze.html", context)
         return JsonResponse({"content": content})
     return HttpResponseBadRequest("Form errors")
 

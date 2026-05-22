@@ -81,6 +81,7 @@
                   <button formaction="{% url 'djdt:sql_select' %}" class="remoteCall">Sel</button>
                   <button formaction="{% url 'djdt:sql_explain' %}" class="remoteCall">Expl</button>
                   {% if query.vendor == 'mysql' %}
+                    <button formaction="{% url 'djdt:sql_analyze' %}" class="remoteCall">Analyze</button>
                     <button formaction="{% url 'djdt:sql_profile' %}" class="remoteCall">Prof</button>
                   {% endif %}
                 </form>
