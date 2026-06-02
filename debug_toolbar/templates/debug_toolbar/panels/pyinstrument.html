@@ -1,0 +1,23 @@
+{% load i18n %}
+<div style="padding:16px">
+  {% if profile_active %}
+    <p style="color:#aaa;font-size:13px">
+      {% trans "?profile is already active on this URL." %}
+    </p>
+  {% else %}
+    <p style="margin-bottom:8px;color:#aaa;font-size:13px">
+      {% trans "Opens the current URL with ?profile in a new tab." %}
+      {% trans "Requires" %} <code>pyinstrument.middleware.ProfilerMiddleware</code> {% trans "in MIDDLEWARE." %}
+    </p>
+    <p style="margin-bottom:12px;font-size:13px">
+      {% trans "Install:" %} <code>pip install pyinstrument</code>
+      &nbsp;·&nbsp;
+      <a href="https://github.com/joerick/pyinstrument" target="_blank" rel="noopener">github.com/joerick/pyinstrument</a>
+    </p>
+    <button type="button"
+            style="padding:6px 16px;cursor:pointer;font-size:13px"
+            onclick="var l=window.location;window.open(l.pathname+(l.search?l.search+'&amp;profile':'?profile')+(l.hash||''),'_blank')">
+      {% trans "Profile with pyinstrument" %}
+    </button>
+  {% endif %}
+</div>

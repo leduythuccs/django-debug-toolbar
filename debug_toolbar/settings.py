@@ -21,8 +21,8 @@ CONFIG_DEFAULTS = {
     "CACHE_BACKEND": "default",
     "CACHE_KEY_PREFIX": "djdt:",
     "DISABLE_PANELS": {
-        "debug_toolbar.panels.line_profiling.LineProfilingPanel",
         "debug_toolbar.panels.profiling.ProfilingPanel",
+        "debug_toolbar.panels.pyinstrument.PyinstrumentPanel",
         "debug_toolbar.panels.redirects.RedirectsPanel",
     },
     "INSERT_BEFORE": "</body>",
@@ -87,7 +87,7 @@ PANELS_DEFAULTS = [
     "debug_toolbar.panels.community.CommunityPanel",
     "debug_toolbar.panels.redirects.RedirectsPanel",
     "debug_toolbar.panels.profiling.ProfilingPanel",
-    "debug_toolbar.panels.line_profiling.LineProfilingPanel",
+    "debug_toolbar.panels.pyinstrument.PyinstrumentPanel",
 ]
 
 
