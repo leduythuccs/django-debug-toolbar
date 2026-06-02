@@ -39,6 +39,7 @@ dynamic = [
 dependencies = [
   "django>=4.2.9",
   "sqlparse>=0.2",
+  "line_profiler>=3.0",
 ]
 urls.Changelog = "https://django-debug-toolbar.readthedocs.io/en/latest/changes.html"
 urls.Documentation = "https://django-debug-toolbar.readthedocs.io/"

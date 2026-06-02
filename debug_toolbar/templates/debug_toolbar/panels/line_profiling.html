@@ -1,0 +1,9 @@
+{% load i18n %}
+{% if func_list %}
+  {% for func in func_list %}
+    <h4>{{ func.name }}</h4>
+    <pre>{{ func.text }}</pre>
+  {% endfor %}
+{% else %}
+  <p>{% trans "No functions were profiled." %}</p>
+{% endif %}
