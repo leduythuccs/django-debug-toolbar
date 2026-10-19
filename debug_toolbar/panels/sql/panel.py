@@ -325,6 +325,7 @@ class SQLPanel(Panel):
             trace_colors = defaultdict(lambda: next(colors))
 
             for query in stats.get("queries", []):
+                query["executed_sql"] = query["sql"]
                 query["sql"] = reformat_sql(query["sql"], with_toggle=True)
                 query["form"] = SignedDataForm(
                     auto_id=None,
